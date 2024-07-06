@@ -3,10 +3,13 @@ import java.util.Scanner;
 public class Game {
     private static char[][] board;
     private static char currentPlayer;
+    private static int scoreX, scoreO;
 
     public Game(){
         board = new char[3][3];
         currentPlayer = 'X';
+        scoreX=0;
+        scoreO=0;
         initializeBoard();
     }
 
@@ -16,15 +19,61 @@ public class Game {
                 board[i][j] = '#';
             }
         }
-        printBoard(board);
+        printBoard();
     }
 
-    public static void printBoard(char[][] board){
+    public static void printBoard(){
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 System.out.print(j<2?board[i][j]+" | ":board[i][j]);
             }
             System.out.println();
+        }
+    }
+
+    public static void checkWinner(){
+        for (int i = 0; i < 3; i++) {
+            if(board[0][i]==currentPlayer && board[1][i]==currentPlayer && board[2][i]==currentPlayer){
+                System.out.println(currentPlayer+" wins!!!");
+                if(currentPlayer=='X'){
+                    scoreX++;
+                } else {
+                    scoreO++;
+                }
+                System.out.println("Score: X: "+scoreX+" - "+scoreO+" :O ");
+                initializeBoard();
+            }
+            if(board[i][0]==currentPlayer && board[i][1]==currentPlayer && board[i][2]==currentPlayer){
+                System.out.println(currentPlayer+" wins!!!");
+                if(currentPlayer=='X'){
+                    scoreX++;
+
+                } else {
+                    scoreO++;
+                }
+                System.out.println("Score: X: "+scoreX+" - "+scoreO+" :O ");
+                initializeBoard();
+            }
+        }
+        if(board[0][0]==currentPlayer && board[1][1]==currentPlayer && board[2][2]==currentPlayer){
+            System.out.println(currentPlayer+" wins!!!");
+            if(currentPlayer=='X'){
+                scoreX++;
+            } else {
+                scoreO++;
+            }
+            System.out.println("Score: X: "+scoreX+" - "+scoreO+" :O ");
+            initializeBoard();
+        }
+        if(board[0][2]==currentPlayer && board[1][1]==currentPlayer && board[2][0]==currentPlayer){
+            System.out.println(currentPlayer+" wins!!!");
+            if(currentPlayer=='X'){
+                scoreX++;
+            } else {
+                scoreO++;
+            }
+            System.out.println("Score: X: "+scoreX+" - "+scoreO+" :O ");
+            initializeBoard();
         }
     }
 
@@ -70,7 +119,8 @@ public class Game {
             System.out.println("Enter Playing position: ");
             int input = scanner.nextInt();
             boardIndices(input);
-            printBoard(board);
+            printBoard();
+            checkWinner();
             playerSwitch();
         }
     }
