@@ -108,6 +108,7 @@ public class Game {
                 break;
             case 8: board[2][2] = currentPlayer;
                 break;
+                case 9: System.exit(0);
         }
     }
 
@@ -127,6 +128,7 @@ public class Game {
                 }
                 System.out.println();
             }
+            System.out.println("Enter 9 to exit");
             System.out.println("Enter Playing position: ");
             int input = scanner.nextInt();
             boardIndices(input);
