@@ -77,6 +77,17 @@ public class Game {
         }
     }
 
+    public static boolean checkDraw(){
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(board[i][j]=='#'){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public static void boardIndices(int position){
         switch (position){
             case 0: board[0][0] = currentPlayer;
@@ -120,6 +131,11 @@ public class Game {
             int input = scanner.nextInt();
             boardIndices(input);
             printBoard();
+            if(checkDraw()){
+                System.out.println("It's a Draw!");
+                System.out.println("Score: X: "+scoreX+" - "+scoreO+" :O ");
+                initializeBoard();
+            }
             checkWinner();
             playerSwitch();
         }
